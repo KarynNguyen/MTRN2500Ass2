@@ -33,6 +33,7 @@
 
 #include "Shape.hpp"
 #include "Vehicle.hpp"
+#include "RectangularPrism.hpp"
 
 #include "RemoteDataManager.hpp"
 #include "Messages.hpp"
@@ -153,6 +154,14 @@ void drawGoals()
 	}
 }
 
+void testDraw()
+{
+	RectangularPrism rectPrism1(10.0, 6.0, 8.0, 1, 1, 0);
+	rectPrism1.draw();
+	//TriangularPrism triPrism1(3.0, 4.0, 5.0, 8.0, 0, 0, 1);
+	//triPrism1.draw();
+};
+
 void display() {
 	frameCounter++;
 	// -------------------------------------------------------------------------
@@ -194,6 +203,8 @@ void display() {
 
 	// draw HUD
 	HUD::Draw();
+
+	testDraw();
 
 	glutSwapBuffers();
 };
