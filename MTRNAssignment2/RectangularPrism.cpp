@@ -31,11 +31,10 @@ RectangularPrism::RectangularPrism(double length, double width, double depth, fl
 //Note: (x,y,z) is the centre of the prism
 //draws the 6 faces of the rectangular prism 
 void RectangularPrism::draw() {
-
+	//move to RectangularPrism's local frame of reference
+	glPushMatrix();
 	setColorInGL();
 	positionInGL();
-
-	glPushMatrix();
 	glTranslated(x_len/2.0, 0, z_len/2.0);
 
 	//bottom face

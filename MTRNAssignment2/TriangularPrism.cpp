@@ -40,11 +40,10 @@ TriangularPrism::TriangularPrism(double side1, double side2, double angle, doubl
 void TriangularPrism::draw() {
 
 	double xCoord = side * cos(angleInRad);		//calculating x coordinate of vertex of triangle using trigonometry
-
+	//move to TriangularPrism's local frame of reference
+	glPushMatrix();
 	setColorInGL();
 	positionInGL();
-
-	glPushMatrix();
 	glTranslated(base/2.0, 0, z_len/2.0);
 	
 	//bottom face (rectangle)

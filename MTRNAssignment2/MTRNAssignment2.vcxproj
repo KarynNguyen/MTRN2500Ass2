@@ -152,6 +152,7 @@
     <ClInclude Include="HUD.hpp" />
     <ClInclude Include="KeyManager.hpp" />
     <ClInclude Include="Messages.hpp" />
+    <ClInclude Include="myVehicle.hpp" />
     <ClInclude Include="Obstacle.hpp" />
     <ClInclude Include="ObstacleManager.hpp" />
     <ClInclude Include="Quaternion.hpp" />
@@ -171,6 +172,7 @@
     <ClCompile Include="KeyManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Messages.cpp" />
+    <ClCompile Include="myVehicle.cpp" />
     <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="ObstacleManager.cpp" />
     <ClCompile Include="Quaternion.cpp" />

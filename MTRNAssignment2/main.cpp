@@ -155,7 +155,7 @@ void drawGoals()
 		glPopMatrix();
 	}
 }
-
+/*
 void testDraw()
 {
 	//RectangularPrism rectPrism1(10.0, 6.0, 8.0, 1, 1, 0);
@@ -164,7 +164,7 @@ void testDraw()
 	//triPrism1.draw();
 	TrapPrism trapPrism1(10.0, 6.0, 6.0, 8.0, 1.5, 0, 1, 0);
 	trapPrism1.draw();
-};
+};*/
 
 void display() {
 	frameCounter++;
@@ -207,8 +207,8 @@ void display() {
 
 	// draw HUD
 	HUD::Draw();
-
-	testDraw();
+	
+	//testDraw();
 
 	glutSwapBuffers();
 };

@@ -36,15 +36,13 @@ TrapPrism::TrapPrism(double a_length, double b_length, double height, double dep
 //Note: (x,y,z) is the centre of the prism
 //draws the 6 faces of the trapezoidal prism 
 void TrapPrism::draw() {
-
+	//move to TrapPrism's local frame of reference
+	glPushMatrix();
 	setColorInGL();
 	positionInGL();
-
-	glPushMatrix();
 	glTranslated(a_len / 2.0, 0, z_depth / 2.0);
 
 	//bottom face (rectangle)
-	glColor3f(0, 0.5, 0.2);
 	glBegin(GL_QUADS);
 	glVertex3f(0, 0, 0);
 	glVertex3f(0, 0, -z_depth);
@@ -53,7 +51,6 @@ void TrapPrism::draw() {
 	glEnd();
 
 	//top face(rectangle)
-	glColor3f(1, 1, 0);
 	glBegin(GL_QUADS);
 	glVertex3f(-a_off, y_height, 0);
 	glVertex3f(-a_off, y_height, -z_depth);
@@ -62,7 +59,6 @@ void TrapPrism::draw() {
 	glEnd();
 	
 	//left side face (rectangle)
-	glColor3f(1, 0, 1);
 	glBegin(GL_QUADS);
 	glVertex3f(0, 0, 0);
 	glVertex3f(0, 0, -z_depth);
@@ -79,7 +75,6 @@ void TrapPrism::draw() {
 	glEnd();
 	
 	//back face (trapezium)
-	glColor3f(1, 1, 1);
 	glBegin(GL_QUADS);
 	glVertex3f(0, 0, 0);
 	glVertex3f(-a_len, 0, 0);
@@ -88,7 +83,6 @@ void TrapPrism::draw() {
 	glEnd();
 	
 	//front face (trapezium)
-	glColor3f(0.3, 0.1, 0.7);
 	glBegin(GL_QUADS);
 	glVertex3f(0, 0, -z_depth);
 	glVertex3f(-a_len, 0, -z_depth);
