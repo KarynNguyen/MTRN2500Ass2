@@ -15,7 +15,7 @@ public:
 	double z_len;
 	double y_height;
 
-	//function to draw the rectangular prism
+	//function to draw the triangular prism
 	void draw();
 
 };

@@ -36,7 +36,7 @@ TriangularPrism::TriangularPrism(double side1, double side2, double angle, doubl
 };
 
 //Note: (x,y,z) is the centre of the prism
-//draws the 6 faces of the rectangular prism 
+//draws the 5 faces of the triangular prism 
 void TriangularPrism::draw() {
 
 	double xCoord = side * cos(angleInRad);		//calculating x coordinate of vertex of triangle using trigonometry

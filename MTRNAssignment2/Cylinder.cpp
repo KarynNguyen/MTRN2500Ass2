@@ -29,7 +29,7 @@ Cylinder::Cylinder(double radius, double height, float red, float green, float b
 	setColor(red, green, blue);
 }
 
-Cylinder::draw() {
+void Cylinder::draw() {
 	
 	static GLUquadric * quad = gluNewQuadric();
 	gluQuadricNormals(quad, GLU_SMOOTH);

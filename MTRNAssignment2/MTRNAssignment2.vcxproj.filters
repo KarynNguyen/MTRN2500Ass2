@@ -60,6 +60,9 @@
     <ClInclude Include="TriangularPrism.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TrapPrism.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp">
@@ -108,6 +111,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TriangularPrism.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TrapPrism.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
