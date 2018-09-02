@@ -22,17 +22,36 @@
 Cylinder::Cylinder(double radius, double height, float red, float green, float blue) {
 
 	//set dimensions
-	radius = radius;
-	height = height;
+	r = radius;
+	h = height;
 	
 	//sets colour of cylinder
 	setColor(red, green, blue);
 }
 
+//draw function
 void Cylinder::draw() {
 	
-	static GLUquadric * quad = gluNewQuadric();
-	gluQuadricNormals(quad, GLU_SMOOTH);
+	GLUquadricObj * disk1 = gluNewQuadric();			//cap of cylinder
+	GLUquadricObj * disk2 = gluNewQuadric();			//base of cylinder
+	GLUquadricObj * cylinder = gluNewQuadric();			//body of cylinder
 
-	gluCylinder(quad, radius, radius, height, 10, 10);
+	glPushMatrix();
+	setColorInGL();
+	positionInGL();
+
+	//moved axis so that cylinder is level with y = 0 and is the middle of the x and z axis
+	glTranslated(0, r, -h/2.0);
+
+	//cap of cylinder
+	gluDisk(disk1, 0, r, 25, 1);
+	
+	//body of cylinder
+	gluCylinder(cylinder, r, r, h, 20, 20);
+	
+	//base of cylinder
+	gluDisk(disk2, 0, r, 25, 1);
+
+	glPopMatrix();
 }
+

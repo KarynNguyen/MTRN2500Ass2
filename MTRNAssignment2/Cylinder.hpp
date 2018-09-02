@@ -1,15 +1,15 @@
 
 #include "Shape.hpp"
 
-//Absract RectangularPrism class derived from Shape
+//Absract Cylinder class derived from Shape
 
 class Cylinder : public Shape
 {
-
+public:
 	Cylinder(double radius, double height, float red, float green, float blue);
 
-	double radius;
-	double height;
+	double r;
+	double h;
 
 	//function to draw the cylinder
 	void draw();

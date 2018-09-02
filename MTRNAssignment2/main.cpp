@@ -36,6 +36,7 @@
 #include "RectangularPrism.hpp"
 #include "TriangularPrism.hpp"
 #include "TrapPrism.hpp"
+#include "Cylinder.hpp"
 
 #include "RemoteDataManager.hpp"
 #include "Messages.hpp"
@@ -155,25 +156,18 @@ void drawGoals()
 		glPopMatrix();
 	}
 }
-/*
+
 void testDraw()
 {
 	//RectangularPrism rectPrism1(10.0, 6.0, 8.0, 1, 1, 0);
 	//rectPrism1.draw();
 	//TriangularPrism triPrism1(6.0, 6.0 ,60.0, 8.0, 0, 0, 1);
 	//triPrism1.draw();
-<<<<<<< HEAD
-	Cylinder cyl1(5, 10, 1, 0, 0);
+	Cylinder cyl1(5.0, 10.0, 1, 0, 0);
 	cyl1.draw();
-=======
-	TrapPrism trapPrism1(10.0, 6.0, 6.0, 8.0, 1.5, 0, 1, 0);
-	trapPrism1.draw();
-<<<<<<< HEAD
-};*/
-=======
->>>>>>> a27079910a10943d0fdba9053bae47d17d383a0a
+	//TrapPrism trapPrism1(10.0, 6.0, 6.0, 8.0, 1.5, 0, 1, 0);
+	//trapPrism1.draw();
 };
->>>>>>> 9cfd0d2d54c8194817ce7b95e4c486b141f3dad7
 
 void display() {
 	frameCounter++;
@@ -217,7 +211,7 @@ void display() {
 	// draw HUD
 	HUD::Draw();
 	
-	//testDraw();
+	testDraw();
 
 	glutSwapBuffers();
 };
