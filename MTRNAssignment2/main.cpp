@@ -35,6 +35,7 @@
 #include "Vehicle.hpp"
 #include "RectangularPrism.hpp"
 #include "TriangularPrism.hpp"
+#include "TrapPrism.hpp"
 
 #include "RemoteDataManager.hpp"
 #include "Messages.hpp"
@@ -159,8 +160,10 @@ void testDraw()
 {
 	//RectangularPrism rectPrism1(10.0, 6.0, 8.0, 1, 1, 0);
 	//rectPrism1.draw();
-	TriangularPrism triPrism1(6.0, 6.0 ,60.0, 8.0, 0, 0, 1);
-	triPrism1.draw();
+	//TriangularPrism triPrism1(6.0, 6.0 ,60.0, 8.0, 0, 0, 1);
+	//triPrism1.draw();
+	TrapPrism trapPrism1(10.0, 6.0, 6.0, 8.0, 1.5, 0, 1, 0);
+	trapPrism1.draw();
 };
 
 void display() {
