@@ -31,65 +31,60 @@ RectangularPrism::RectangularPrism(double length, double width, double depth, fl
 //Note: (x,y,z) is the centre of the prism
 //draws the 6 faces of the rectangular prism 
 void RectangularPrism::draw() {
-	//glPushMatrix();
+
 	setColorInGL();
 	positionInGL();
 
-	double xCoordPos = getX() + x_len / 2.0;		//x coordinate in positive direction
-	double xCoordNeg = getX() - x_len / 2.0;		//x coordinate in negative direction
-	double yCoordPos = getY() + y_len / 2.0;		//y coordinate in positive direction
-	double yCoordNeg = getY() - y_len / 2.0;		//y coordinate in negative direction
-	double zCoordPos = getZ() + z_len / 2.0;		//z coordinate in positive direction
-	double zCoordNeg = getZ() - z_len / 2.0;		//z coordinate in negative direction
-
-													//top face
-	glBegin(GL_QUADS);
-	glVertex3f(xCoordPos, yCoordPos, zCoordPos);
-	glVertex3f(xCoordPos, yCoordPos, zCoordNeg);
-	glVertex3f(xCoordNeg, yCoordPos, zCoordNeg);
-	glVertex3f(xCoordNeg, yCoordPos, zCoordPos);
-	glEnd();
+	glPushMatrix();
+	glTranslated(x_len/2.0, 0, z_len/2.0);
 
 	//bottom face
 	glBegin(GL_QUADS);
-	glVertex3f(xCoordPos, yCoordNeg, zCoordPos);
-	glVertex3f(xCoordNeg, yCoordNeg, zCoordPos);
-	glVertex3f(xCoordNeg, yCoordNeg, zCoordNeg);
-	glVertex3f(xCoordPos, yCoordNeg, zCoordNeg);
+	glVertex3f(0, 0, 0);
+	glVertex3f(0, 0, -z_len);
+	glVertex3f(-x_len, 0, -z_len);
+	glVertex3f(-x_len, 0,  0);
 	glEnd();
-
-
+	
+	//top face
+	glBegin(GL_QUADS);
+	glVertex3f(0, y_len, 0);
+	glVertex3f(0, y_len, -z_len);
+	glVertex3f(-x_len, y_len, -z_len);
+	glVertex3f(-x_len, y_len,  0);
+	glEnd();
+	
 	//left side face
 	glBegin(GL_QUADS);
-	glVertex3f(xCoordPos, yCoordPos, zCoordPos);
-	glVertex3f(xCoordPos, yCoordNeg, zCoordPos);
-	glVertex3f(xCoordPos, yCoordNeg, zCoordNeg);
-	glVertex3f(xCoordPos, yCoordPos, zCoordNeg);
+	glVertex3f(0, 0, 0);
+	glVertex3f(0, 0, -z_len);
+	glVertex3f(0, y_len, -z_len);
+	glVertex3f(0, y_len,  0);
 	glEnd();
-
+	
 	//right side face
 	glBegin(GL_QUADS);
-	glVertex3f(xCoordNeg, yCoordPos, zCoordPos);
-	glVertex3f(xCoordNeg, yCoordNeg, zCoordPos);
-	glVertex3f(xCoordNeg, yCoordNeg, zCoordNeg);
-	glVertex3f(xCoordNeg, yCoordPos, zCoordNeg);
+	glVertex3f(-x_len, 0, 0);
+	glVertex3f(-x_len, 0, -z_len);
+	glVertex3f(-x_len, y_len, -z_len);
+	glVertex3f(-x_len, y_len,  0);
 	glEnd();
 
 	//front face
 	glBegin(GL_QUADS);
-	glVertex3f(xCoordPos, yCoordPos, zCoordPos);
-	glVertex3f(xCoordPos, yCoordNeg, zCoordPos);
-	glVertex3f(xCoordNeg, yCoordNeg, zCoordPos);
-	glVertex3f(xCoordNeg, yCoordPos, zCoordPos);
+	glVertex3f(0, 0, -z_len);
+	glVertex3f(-x_len, 0, -z_len);
+	glVertex3f(-x_len, y_len, -z_len);
+	glVertex3f(0, y_len, -z_len);
 	glEnd();
 
 	//back face
 	glBegin(GL_QUADS);
-	glVertex3f(xCoordPos, yCoordPos, zCoordNeg);
-	glVertex3f(xCoordPos, yCoordNeg, zCoordNeg);
-	glVertex3f(xCoordNeg, yCoordNeg, zCoordNeg);
-	glVertex3f(xCoordNeg, yCoordPos, zCoordNeg);
+	glVertex3f(0, 0, 0);
+	glVertex3f(-x_len, 0, 0);
+	glVertex3f(-x_len, y_len, 0);
+	glVertex3f(0, y_len, 0);
 	glEnd();
-
-	//glPopMatrix();
+	
+	glPopMatrix();
 };
