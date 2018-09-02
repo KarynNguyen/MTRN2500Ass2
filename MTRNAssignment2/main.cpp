@@ -159,8 +159,10 @@ void testDraw()
 {
 	//RectangularPrism rectPrism1(10.0, 6.0, 8.0, 1, 1, 0);
 	//rectPrism1.draw();
-	TriangularPrism triPrism1(6.0, 6.0 ,60.0, 8.0, 0, 0, 1);
-	triPrism1.draw();
+	//TriangularPrism triPrism1(6.0, 6.0 ,60.0, 8.0, 0, 0, 1);
+	//triPrism1.draw();
+	Cylinder cyl1(5, 10, 1, 0, 0);
+	cyl1.draw();
 };
 
 void display() {
