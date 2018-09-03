@@ -33,10 +33,11 @@
 
 #include "Shape.hpp"
 #include "Vehicle.hpp"
-#include "RectangularPrism.hpp"
-#include "TriangularPrism.hpp"
-#include "TrapPrism.hpp"
-#include "Cylinder.hpp"
+#include "myVehicle.hpp"
+//#include "RectangularPrism.hpp"
+//#include "TriangularPrism.hpp"
+//#include "TrapPrism.hpp"
+//#include "Cylinder.hpp"
 
 #include "RemoteDataManager.hpp"
 #include "Messages.hpp"
@@ -111,7 +112,7 @@ int main(int argc, char ** argv) {
 	//   custom vehicle.
 	// -------------------------------------------------------------------------
 
-	//vehicle = new MyVehicle();
+	vehicle = new myVehicle();
 
 
 	// add test obstacles
@@ -163,10 +164,11 @@ void testDraw()
 	//rectPrism1.draw();
 	//TriangularPrism triPrism1(6.0, 6.0 ,60.0, 8.0, 0, 0, 1);
 	//triPrism1.draw();
-	Cylinder cyl1(5.0, 10.0, 1, 0, 0);
-	cyl1.draw();
+	//Cylinder cyl1(5.0, 10.0, 1, 0, 0);
+	//cyl1.draw();
 	//TrapPrism trapPrism1(10.0, 6.0, 6.0, 8.0, 1.5, 0, 1, 0);
 	//trapPrism1.draw();
+
 };
 
 void display() {

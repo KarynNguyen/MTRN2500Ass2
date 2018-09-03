@@ -6,7 +6,7 @@
 class TrapPrism : public Shape
 {
 public:
-	TrapPrism(double a_lenght, double b_length, double height, double depth, double a_offset, float red, float green, float blue);			//constructor
+	TrapPrism(double a_length, double b_length, double height, double depth, double a_offset, float red, float green, float blue);			//constructor
 
 	//dimensions of triangular prism
 	double a_len;

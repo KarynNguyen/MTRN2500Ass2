@@ -50,6 +50,7 @@ void Cylinder::draw() {
 	gluCylinder(cylinder, r, r, h, 20, 20);
 	
 	//base of cylinder
+	glTranslated(0, 0, h);
 	gluDisk(disk2, 0, r, 25, 1);
 
 	glPopMatrix();
