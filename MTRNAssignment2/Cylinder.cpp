@@ -19,12 +19,34 @@
 
 #endif
 
-Cylinder::Cylinder(double radius, double height, float red, float green, float blue) {
+//constructor w/o centre position or rotation
+Cylinder::Cylinder(double radius, double height, float red, float green, float blue) : Shape() {
+	//set dimensions
+	r = radius;
+	h = height;
+
+	//sets colour of cylinder
+	setColor(red, green, blue);
+}
+
+//constructor w/o rotation
+Cylinder::Cylinder(double radius, double height, float red, float green, float blue, double x, double y, double z) : Shape (x, y, z) {
 
 	//set dimensions
 	r = radius;
 	h = height;
 	
+	//sets colour of cylinder
+	setColor(red, green, blue);
+}
+
+//constructor with rotation
+Cylinder::Cylinder(double radius, double height, float red, float green, float blue, double x, double y, double z, double rotation) : Shape(x, y, z, rotation) {
+
+	//set dimensions
+	r = radius;
+	h = height;
+
 	//sets colour of cylinder
 	setColor(red, green, blue);
 }
@@ -39,9 +61,8 @@ void Cylinder::draw() {
 	glPushMatrix();
 	setColorInGL();
 	positionInGL();
-
-	//moved axis so that cylinder is level with y = 0 and is the middle of the x and z axis
-	glTranslated(0, r, -h/2.0);
+	
+	glTranslated(0, 0, -h / 2.0);
 
 	//cap of cylinder
 	gluDisk(disk1, 0, r, 25, 1);

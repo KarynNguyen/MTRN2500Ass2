@@ -56,36 +56,35 @@ void myVehicle::draw() {
 
 	//draw rectangular prism body of vehicle
 	glPushMatrix();
-	glTranslated(0, 0, 0);
-	RectangularPrism rectBody(rect_l, rect_w, rect_d, 1, 0, 0);		//red body
+	RectangularPrism rectBody(rect_l, rect_w, rect_d, 1, 0, 0, 0, 0 ,0, 0);		//red body
 	rectBody.draw();
 	glPopMatrix();
 	
 	//draw trapezoidal prism on top of body
 	glPushMatrix();
 	glTranslated(0, rect_w, 0);
-	TrapPrism trapTop(trap_a, trap_b, trap_h, trap_depth, trap_off, 1, 0, 0);		//blue top
+	TrapPrism trapTop(trap_a, trap_b, trap_h, trap_depth, trap_off, 1, 0, 0, 0, 0, 0, 0);		//blue top
 	trapTop.draw();
 	glPopMatrix();
 
 	//draw front wheels (closed solid cylinder)
 	glPushMatrix();
 	glTranslated(1.0, -0.5, 0);
-	Cylinder fWheel(radius, depth, 1, 1, 1);		//white front wheels
+	Cylinder fWheel(radius, depth, 1, 1, 1, 0 ,0 ,0, 0);		//white front wheels
 	fWheel.draw();
 	glPopMatrix();
 
 	//draw back wheels (closed solid cylinder)
 	glPushMatrix();
 	glTranslated(-1.0, -0.5, 0);
-	Cylinder bWheel(radius, depth, 1, 1, 1);		//white back wheels
+	Cylinder bWheel(radius, depth, 1, 1, 1, 0, 0, 0, 0);		//white back wheels
 	bWheel.draw();
 	glPopMatrix();
 
 	//draw lights on top (triangluar prism)
 	glPushMatrix();
 	glTranslated(0, rect_w + trap_h, 0);
-	TriangularPrism triSpoilerBase(side, base, angle, tri_depth, 0, 0, 1);		//blue lights on top
+	TriangularPrism triSpoilerBase(side, base, angle, tri_depth, 0, 0, 1, 0, 0, 0, 0);		//blue lights on top
 	triSpoilerBase.draw();
 	glPopMatrix();
 

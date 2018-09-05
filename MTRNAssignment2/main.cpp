@@ -160,15 +160,18 @@ void drawGoals()
 
 void testDraw()
 {
-	//RectangularPrism rectPrism1(10.0, 6.0, 8.0, 1, 1, 0);
-	//rectPrism1.draw();
-	//TriangularPrism triPrism1(6.0, 6.0 ,60.0, 8.0, 0, 0, 1);
-	//triPrism1.draw();
-	//Cylinder cyl1(5.0, 10.0, 1, 0, 0);
-	//cyl1.draw();
-	//TrapPrism trapPrism1(10.0, 6.0, 6.0, 8.0, 1.5, 0, 1, 0);
-	//trapPrism1.draw();
 
+	RectangularPrism rectPrism1(10.0, 6.0, 8.0, 1, 0, 0, 20 ,0 ,20, 0);
+	rectPrism1.draw();
+
+	TriangularPrism triPrism1(10.0, 10.0 ,60.0, 8.0, 0, 1, 0, -20, 0, 20, 45);
+	triPrism1.draw();
+
+	TrapPrism trapPrism1(10.0, 6.0, 6.0, 8.0, 1.5, 0, 0, 1, -20, 0, -20, 0);
+	trapPrism1.draw();
+
+	Cylinder cyl1(3.0, 10.0, 1, 1, 1, 20, 0, -20, 90);
+	cyl1.draw();
 };
 
 void display() {
