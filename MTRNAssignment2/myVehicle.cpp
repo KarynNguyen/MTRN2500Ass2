@@ -27,6 +27,10 @@ myVehicle::myVehicle() {
 //Note: (x,y,z) is the centre of the prism
 //draws the 6 faces of the trapezoidal prism 
 void myVehicle::draw() {
+	glPushMatrix();
+
+	glPopMatrix();
+
 	//dimensions of rectangle base
 	double rect_l = 4.0;
 	double rect_w = 1.75;
@@ -40,8 +44,9 @@ void myVehicle::draw() {
 	double trap_depth = 2.5;
 
 	//dimensions of cylindrical wheels
-	double radius = 0.5;
-	double depth = 2.5;
+	double radius_b = 0.5;
+	double radius_f = 0.5;
+	double depth = 0.5;
 
 	//dimensions of triangular prism on top of head
 	double side = 0.5;
@@ -53,7 +58,7 @@ void myVehicle::draw() {
 	glPushMatrix();
 	positionInGL();
 	// all the local drawing code
-
+	
 	//draw rectangular prism body of vehicle
 	glPushMatrix();
 	RectangularPrism rectBody(rect_l, rect_w, rect_d, 1, 0, 0, 0, 0 ,0, 0);		//red body
@@ -62,30 +67,39 @@ void myVehicle::draw() {
 	
 	//draw trapezoidal prism on top of body
 	glPushMatrix();
-	glTranslated(0, rect_w, 0);
-	TrapPrism trapTop(trap_a, trap_b, trap_h, trap_depth, trap_off, 1, 0, 0, 0, 0, 0, 0);		//blue top
+	TrapPrism trapTop(trap_a, trap_b, trap_h, trap_depth, trap_off, 1, 0, 0, 0, rect_w, 0, 0);		//blue top
 	trapTop.draw();
 	glPopMatrix();
-
-	//draw front wheels (closed solid cylinder)
+	
+	//draw left front wheels (closed solid cylinder)
 	glPushMatrix();
-	glTranslated(1.0, -0.5, 0);
-	Cylinder fWheel(radius, depth, 1, 1, 1, 0 ,0 ,0, 0);		//white front wheels
-	fWheel.draw();
+	Cylinder flWheel(radius_f, depth, 1, 1, 1, 1.2 , 0, -rect_d/2.0, 0);		//white front wheels
+	flWheel.drawWheel();
 	glPopMatrix();
 
-	//draw back wheels (closed solid cylinder)
+	//draw right front wheel (closed solid cylinder)
 	glPushMatrix();
-	glTranslated(-1.0, -0.5, 0);
-	Cylinder bWheel(radius, depth, 1, 1, 1, 0, 0, 0, 0);		//white back wheels
-	bWheel.draw();
+	Cylinder frWheel(radius_f, depth, 1, 1, 1, 1.2, 0, rect_d/2.0, 0);		//white front wheels
+	frWheel.drawWheel();
+	glPopMatrix();
+	
+	
+	//draw right back wheel (closed solid cylinder)
+	glPushMatrix();
+	Cylinder brWheel(radius_b, depth, 1, 1, 1, -1.2, 0, rect_d/2.0, 0);		//white back wheels
+	brWheel.drawWheel();
 	glPopMatrix();
 
+	//draw left back wheel (closed solid cylinder)
+	glPushMatrix();
+	Cylinder blWheel(radius_b, depth, 1, 1, 1, -1.2, 0, -rect_d/2.0, 0);		//white back wheels
+	blWheel.drawWheel();
+	glPopMatrix();
+	
 	//draw lights on top (triangluar prism)
 	glPushMatrix();
-	glTranslated(0, rect_w + trap_h, 0);
-	TriangularPrism triSpoilerBase(side, base, angle, tri_depth, 0, 0, 1, 0, 0, 0, 0);		//blue lights on top
-	triSpoilerBase.draw();
+	TriangularPrism triTop(side, base, angle, tri_depth, 0, 0, 1, 0, rect_w + trap_h, 0, 0);		//blue lights on top
+	triTop.draw();
 	glPopMatrix();
 
 	// move back to global frame of reference

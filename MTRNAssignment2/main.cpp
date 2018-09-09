@@ -170,8 +170,11 @@ void testDraw()
 	TrapPrism trapPrism1(10.0, 6.0, 6.0, 8.0, 1.5, 0, 0, 1, -20, 0, -20, 0);
 	trapPrism1.draw();
 
-	Cylinder cyl1(3.0, 10.0, 1, 1, 1, 20, 0, -20, 90);
+	Cylinder cyl1(6.0, 2.0, 1, 0, 0.4, 20, 0, -20, 90);
 	cyl1.draw();
+	
+	Cylinder cyl2(3.0, 10.0, 0, 1, 1, 30, 0, -30, 90);
+	cyl2.drawWheel();
 };
 
 void display() {
@@ -332,6 +335,7 @@ void idle() {
 					// student code goes here
 					//
 
+
 					RemoteDataManager::Write(GetVehicleModelStr(vm));
 				}
 			}
@@ -366,7 +370,7 @@ void idle() {
 								VehicleModel vm = models[i];
 								
 								// uncomment the line below to create remote vehicles
-								//otherVehicles[vm.remoteID] = new MyVehicle();
+								//otherVehicles[vm.remoteID] = new myVehicle();
 
 								//
 								// more student code goes here
