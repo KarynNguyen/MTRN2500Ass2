@@ -24,6 +24,13 @@ myVehicle::myVehicle() {
 
 };
 
+
+void myVehicle::update(double speed_, double dt) {
+	speed = speed + ((speed_)-speed)*dt * 4;
+
+	update(speed_, dt);
+}
+
 //Note: (x,y,z) is the centre of the prism
 //draws the 6 faces of the trapezoidal prism 
 void myVehicle::draw() {
@@ -77,10 +84,14 @@ void myVehicle::draw() {
 	flWheel.drawWheel();
 	glPopMatrix();
 
+
 	//draw right front wheel (closed solid cylinder)
 	glPushMatrix();
 	Cylinder frWheel(radius_f, depth, 1, 1, 1, 1.2, 0, rect_d/2.0, 0);		//white front wheels
 	frWheel.drawWheel();
+	update(speed, dt);
+	rotation = (speed*dt) / radius_f;
+	glRotated(rotation, 0, 1, 0);
 	glPopMatrix();
 	
 	

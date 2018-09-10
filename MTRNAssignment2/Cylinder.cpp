@@ -67,12 +67,6 @@ void Cylinder::draw() {
 
 	glPopMatrix();
 }
-void Cylinder::update(double speed_, double dt) {
-		speed = speed + ((speed_)-speed)*dt * 4;
-
-		update(speed_, dt);
-} 
-
 //draws wheels with spokes
 void Cylinder::drawWheel() {
 
@@ -171,13 +165,13 @@ void Cylinder::drawWheel() {
 	glPopMatrix();
 
 	//rotate wheels
-	
+	/*
 	update(speed, dt);
 
 	rotation = (speed*dt)/r;
 
-	glRotated(rotation, 0, 1, 0 );
-	
+	glRotated(rotation, 0, 1, 0 ); //causes overflow now...
+	*/
 }
 
 
