@@ -71,7 +71,7 @@ void Cylinder::update(double speed_, double dt) {
 		speed = speed + ((speed_)-speed)*dt * 4;
 
 		update(speed_, dt);
-} */
+} 
 
 //draws wheels with spokes
 void Cylinder::drawWheel() {
@@ -172,7 +172,7 @@ void Cylinder::drawWheel() {
 
 	//rotate wheels
 	
-	Cylinder.update(double speed_, double dt);
+	update(speed, dt);
 
 	rotation = (speed*dt)/r;
 
