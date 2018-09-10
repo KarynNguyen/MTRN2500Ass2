@@ -104,5 +104,8 @@ void myVehicle::draw() {
 
 	// move back to global frame of reference
 	glPopMatrix();
-};
+}
+
+
+
 

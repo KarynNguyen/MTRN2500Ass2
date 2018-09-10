@@ -14,5 +14,8 @@ public:
 	//function to draw the custom vehicle
 	void draw();
 
+	//function to get dt
+	virtual void getStatus(double dt);
+
 };
 
