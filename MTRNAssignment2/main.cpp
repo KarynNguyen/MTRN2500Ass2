@@ -114,7 +114,6 @@ int main(int argc, char ** argv) {
 
 	vehicle = new myVehicle();
 
-
 	// add test obstacles
 	ObstacleManager::get()->addObstacle(Obstacle(10,10, 1));
 	ObstacleManager::get()->addObstacle(Obstacle(10,-10, 1));
@@ -219,7 +218,7 @@ void display() {
 	// draw HUD
 	HUD::Draw();
 	
-	testDraw();
+	//testDraw();
 
 	glutSwapBuffers();
 };
@@ -322,7 +321,7 @@ void idle() {
 				otherVehicles.clear();
 
 				// uncomment this line to connect to the robotics server.
-				//RemoteDataManager::Connect("www.robotics.unsw.edu.au","18081");
+				RemoteDataManager::Connect("www.robotics.unsw.edu.au","18081");
 
 				// on connect, let's tell the server what we look like
 				if (RemoteDataManager::IsConnected()) {
@@ -331,10 +330,95 @@ void idle() {
 					VehicleModel vm;
 					vm.remoteID = 0;
 
-					//
-					// student code goes here
-					//
+					//(x,y,x) position of custom car
+					float x = 0;
+					float y = 0;
+					float z = 0;
+					ShapeInit ShapesStruct;
 
+					//rectangular prism body of vehicle
+					ShapesStruct.type = RECTANGULAR_PRISM;					//send type param
+					ShapesStruct.xyz[0] = static_cast<float>(x);			//send position parameters
+					ShapesStruct.xyz[1] = static_cast<float>(y);
+					ShapesStruct.xyz[2] = static_cast<float>(z);
+					ShapesStruct.rgb[0] = 1.0;								//colour parameters
+					ShapesStruct.rgb[1] = 0;
+					ShapesStruct.rgb[2] = 0;
+					ShapesStruct.params.rect = { static_cast<float>(4.0), static_cast<float>(1.75), static_cast<float>(2.5) };		//rectanglular parameters
+					ShapesStruct.rotation = 0;
+					vm.shapes.push_back(ShapesStruct);
+
+					//trapezoidal top of body
+					ShapesStruct.type = TRAPEZOIDAL_PRISM;					//send type param
+					ShapesStruct.xyz[0] = static_cast<float>(x);			//send position parameters
+					ShapesStruct.xyz[1] = static_cast<float>(1.75);
+					ShapesStruct.xyz[2] = static_cast<float>(z);
+					ShapesStruct.rgb[0] = 1.0;								//colour parameters
+					ShapesStruct.rgb[1] = 0;
+					ShapesStruct.rgb[2] = 0;
+					ShapesStruct.params.trap = { static_cast<float>(2.0), static_cast<float>(1.0), static_cast<float>(1.0), static_cast<float>(0.5), static_cast<float>(2.5) };		//trapezoidal parameters
+					ShapesStruct.rotation = 0;
+					vm.shapes.push_back(ShapesStruct);
+
+					//triangular prism lights on top
+					ShapesStruct.type = TRIANGULAR_PRISM;					//send type param
+					ShapesStruct.xyz[0] = static_cast<float>(x);			//send position parameters
+					ShapesStruct.xyz[1] = static_cast<float>(2.75);
+					ShapesStruct.xyz[2] = static_cast<float>(z);
+					ShapesStruct.rgb[0] = 0;								//colour parameters
+					ShapesStruct.rgb[1] = 0;
+					ShapesStruct.rgb[2] = 1.0;
+					ShapesStruct.params.trap = { static_cast<float>(0.5), static_cast<float>(0.5), static_cast<float>(60), static_cast<float>(2.5) };		//triangular parameters
+					ShapesStruct.rotation = 0;
+					vm.shapes.push_back(ShapesStruct);
+					
+					//cylinder front left wheel
+					ShapesStruct.type = CYLINDER;					//send type param
+					ShapesStruct.xyz[0] = static_cast<float>(x + 1.2);			//send position parameters
+					ShapesStruct.xyz[1] = static_cast<float>(y);
+					ShapesStruct.xyz[2] = static_cast<float>(z + 1.25);
+					ShapesStruct.rgb[0] = 1.0;								//colour parameters
+					ShapesStruct.rgb[1] = 1.0;
+					ShapesStruct.rgb[2] = 1.0;
+					ShapesStruct.params.trap = { static_cast<float>(0.5), static_cast<float>(1.0) };		//triangular parameters
+					ShapesStruct.rotation = 0;
+					vm.shapes.push_back(ShapesStruct);
+
+					//cylinder front right wheel
+					ShapesStruct.type = CYLINDER;					//send type param
+					ShapesStruct.xyz[0] = static_cast<float>(x + 1.2);			//send position parameters
+					ShapesStruct.xyz[1] = static_cast<float>(y);
+					ShapesStruct.xyz[2] = static_cast<float>(z - 1.25);
+					ShapesStruct.rgb[0] = 1.0;								//colour parameters
+					ShapesStruct.rgb[1] = 1.0;
+					ShapesStruct.rgb[2] = 1.0;
+					ShapesStruct.params.trap = { static_cast<float>(0.5), static_cast<float>(1.0) };		//triangular parameters
+					ShapesStruct.rotation = 0;
+					vm.shapes.push_back(ShapesStruct);
+
+					//cylinder back right wheel
+					ShapesStruct.type = CYLINDER;					//send type param
+					ShapesStruct.xyz[0] = static_cast<float>(x - 1.2);			//send position parameters
+					ShapesStruct.xyz[1] = static_cast<float>(y);
+					ShapesStruct.xyz[2] = static_cast<float>(z - 1.25);
+					ShapesStruct.rgb[0] = 1.0;								//colour parameters
+					ShapesStruct.rgb[1] = 1.0;
+					ShapesStruct.rgb[2] = 1.0;
+					ShapesStruct.params.trap = { static_cast<float>(0.5), static_cast<float>(1.0) };		//triangular parameters
+					ShapesStruct.rotation = 0;
+					vm.shapes.push_back(ShapesStruct);
+
+					//cylinder back left wheel
+					ShapesStruct.type = CYLINDER;					//send type param
+					ShapesStruct.xyz[0] = static_cast<float>(x - 1.2);			//send position parameters
+					ShapesStruct.xyz[1] = static_cast<float>(y);
+					ShapesStruct.xyz[2] = static_cast<float>(z + 1.25);
+					ShapesStruct.rgb[0] = 1.0;								//colour parameters
+					ShapesStruct.rgb[1] = 1.0;
+					ShapesStruct.rgb[2] = 1.0;
+					ShapesStruct.params.trap = { static_cast<float>(0.5), static_cast<float>(1.0) };		//triangular parameters
+					ShapesStruct.rotation = 0;
+					vm.shapes.push_back(ShapesStruct);
 
 					RemoteDataManager::Write(GetVehicleModelStr(vm));
 				}
@@ -370,11 +454,8 @@ void idle() {
 								VehicleModel vm = models[i];
 								
 								// uncomment the line below to create remote vehicles
-								//otherVehicles[vm.remoteID] = new myVehicle();
+								otherVehicles[vm.remoteID] = new myVehicle(models[i]);
 
-								//
-								// more student code goes here
-								//
 							}
 							break;
 						}

@@ -11,6 +11,7 @@ public:
 
 	double r;
 	double h;
+	double rotating;
 
 	//function to draw the cylinder
 	void draw();

@@ -1,5 +1,6 @@
 
 #include "Vehicle.hpp"
+#include "Messages.hpp"
 #include "RectangularPrism.hpp"
 #include "TriangularPrism.hpp"
 #include "TrapPrism.hpp"
@@ -9,7 +10,8 @@
 class myVehicle : public Vehicle
 {
 public:
-	myVehicle();			//constructor
+	myVehicle();					//constructor with no arguments passed in
+	myVehicle(VehicleModel vm);		//constructor with VehicleModel passed in (used to draw other vehicles)
 
 	//function to draw the custom vehicle
 	void draw();

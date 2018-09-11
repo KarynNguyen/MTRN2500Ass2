@@ -29,11 +29,13 @@ Cylinder::Cylinder(double radius, double height, float red, float green, float b
 	setColor(red, green, blue);
 }
 
+//wheel cylinder constructor
 Cylinder::Cylinder(double radius, double height, float red, float green, float blue, double x, double y, double z, double rotation) : Shape(x, y, z, rotation) {
 
 	//set dimensions
 	r = radius;
 	h = height;
+	rotating = rotation; 
 
 	//sets colour of cylinder
 	setColor(red, green, blue);
