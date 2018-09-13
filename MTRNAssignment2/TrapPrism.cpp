@@ -81,42 +81,42 @@ void TrapPrism::draw() {
 
 	//top face(rectangle)
 	glBegin(GL_QUADS);
-	glVertex3f((a_len / 2.0) - a_off, y_height, -z_depth / 2.0);
-	glVertex3f((a_len / 2.0) - a_off - b_len, y_height, -z_depth / 2.0);
-	glVertex3f((a_len / 2.0) - a_off - b_len, y_height, z_depth / 2.0);
-	glVertex3f((a_len / 2.0) - a_off, y_height, z_depth / 2.0);
+	glVertex3f(-(a_len / 2.0) + a_off, y_height, -z_depth / 2.0);
+	glVertex3f(-(a_len / 2.0) + a_off + b_len, y_height, -z_depth / 2.0);
+	glVertex3f(-(a_len / 2.0) + a_off + b_len, y_height, z_depth / 2.0);
+	glVertex3f(-(a_len / 2.0) + a_off, y_height, z_depth / 2.0);
 	glEnd();
 	
 	//left side face (rectangle)
 	glBegin(GL_QUADS);
 	glVertex3f(a_len / 2.0, 0, -z_depth / 2.0);
 	glVertex3f(a_len / 2.0, 0, z_depth / 2.0);
-	glVertex3f((a_len / 2.0) - a_off, y_height, z_depth / 2.0);
-	glVertex3f((a_len / 2.0) - a_off, y_height, -z_depth / 2.0);
+	glVertex3f(-(a_len / 2.0) + a_off, y_height, z_depth / 2.0);
+	glVertex3f(-(a_len / 2.0) + a_off, y_height, -z_depth / 2.0);
 	glEnd();
 	
 	//right side face (rectangle)
 	glBegin(GL_QUADS);
 	glVertex3f(-a_len / 2.0, 0, -z_depth / 2.0);
 	glVertex3f(-a_len / 2.0, 0, z_depth / 2.0);
-	glVertex3f((a_len / 2.0) - a_off - b_len, y_height, z_depth / 2.0);
-	glVertex3f((a_len / 2.0) - a_off - b_len, y_height, -z_depth / 2.0);
+	glVertex3f(-(a_len / 2.0) + a_off + b_len, y_height, z_depth / 2.0);
+	glVertex3f(-(a_len / 2.0) + a_off + b_len, y_height, -z_depth / 2.0);
 	glEnd();
 	
 	//back face (trapezium)
 	glBegin(GL_QUADS);
 	glVertex3f(a_len / 2.0, 0, z_depth / 2.0);
 	glVertex3f(-a_len / 2.0, 0, z_depth / 2.0);
-	glVertex3f((a_len / 2.0) - a_off - b_len, y_height, z_depth / 2.0);
-	glVertex3f((a_len / 2.0) - a_off - b_len, y_height, z_depth / 2.0);
+	glVertex3f(-(a_len / 2.0) + a_off, y_height, z_depth / 2.0);
+	glVertex3f(-(a_len / 2.0) + a_off + b_len, y_height, z_depth / 2.0);
 	glEnd();
 	
 	//front face (trapezium)
 	glBegin(GL_QUADS);
 	glVertex3f(a_len / 2.0, 0, -z_depth / 2.0);
 	glVertex3f(-a_len / 2.0, 0, -z_depth / 2.0);
-	glVertex3f((a_len / 2.0) - a_off - b_len, y_height, -z_depth / 2.0);
-	glVertex3f((a_len / 2.0) - a_off, y_height, -z_depth / 2.0);
+	glVertex3f(-(a_len / 2.0) + a_off, y_height, -z_depth / 2.0);
+	glVertex3f(-(a_len / 2.0) + a_off + b_len, y_height, -z_depth / 2.0);
 	glEnd();
 	
 	glPopMatrix();

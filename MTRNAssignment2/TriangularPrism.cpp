@@ -30,7 +30,7 @@ TriangularPrism::TriangularPrism(double side1, double side2, double angle, doubl
 	side = side2;
 	angleInRad = angle * DEG2RAD;
 	z_len = length;
-	y_height = side * sin(angleInRad);			//caculating heigght of triangle using trigonometry
+	y_height = side * sin(angleInRad);			//caculating height of triangle using trigonometry
 
 												//sets colour of prism
 	setColor(red, green, blue);
@@ -46,10 +46,11 @@ TriangularPrism::TriangularPrism(double side1, double side2, double angle, doubl
 	side = side2;
 	angleInRad = angle * DEG2RAD;
 	z_len = length;
-	y_height = side * sin(angleInRad);			//caculating heigght of triangle using trigonometry
+	y_height = side * sin(angleInRad);			//caculating height of triangle using trigonometry
 
-												//sets colour of prism
+	//sets colour of prism
 	setColor(red, green, blue);
+	positionInGL();
 };
 
 //constructor with rotation
@@ -66,6 +67,7 @@ TriangularPrism::TriangularPrism(double side1, double side2, double angle, doubl
 
 	//sets colour of prism
 	setColor(red, green, blue);
+	positionInGL();
 };
 
 //Note: (x,y,z) is the centre of the prism
@@ -90,30 +92,30 @@ void TriangularPrism::draw() {
 	glBegin(GL_QUADS);
 	glVertex3f(base / 2.0, 0, -z_len / 2.0);
 	glVertex3f(base / 2.0, 0, z_len / 2.0);
-	glVertex3f((base / 2.0) - xCoord, y_height, z_len / 2.0);
-	glVertex3f((base / 2.0) - xCoord, y_height, -z_len / 2.0);
+	glVertex3f(-(base / 2.0) + xCoord, y_height, z_len / 2.0);
+	glVertex3f(-(base / 2.0) + xCoord, y_height, -z_len / 2.0);
 	glEnd();
 	
 	//right side face (rectangle)
 	glBegin(GL_QUADS);
 	glVertex3f( -base / 2.0, 0, -z_len / 2.0);
 	glVertex3f(-base / 2.0, 0, z_len / 2.0);
-	glVertex3f((base / 2.0) - xCoord, y_height, z_len / 2.0);
-	glVertex3f((base / 2.0) - xCoord, y_height, -z_len / 2.0);
+	glVertex3f(-(base / 2.0) + xCoord, y_height, z_len / 2.0);
+	glVertex3f(-(base / 2.0) + xCoord, y_height, -z_len / 2.0);
 	glEnd();
 	
 	//back face (triangle)
 	glBegin(GL_TRIANGLES);
 	glVertex3f(base / 2.0, 0, -z_len / 2.0);
 	glVertex3f(-base / 2.0, 0, -z_len / 2.0);
-	glVertex3f((base / 2.0) - xCoord, y_height, -z_len / 2.0);
+	glVertex3f(-(base / 2.0) + xCoord, y_height, -z_len / 2.0);
 	glEnd();
 	
 	//front face (triangle)
 	glBegin(GL_TRIANGLES);
 	glVertex3f(base / 2.0, 0, z_len / 2.0);
 	glVertex3f(-base / 2.0, 0, z_len / 2.0);
-	glVertex3f((base / 2.0) - xCoord, y_height, z_len / 2.0);
+	glVertex3f(-(base / 2.0) + xCoord, y_height, z_len / 2.0);
 	glEnd();
 	
 	glPopMatrix();

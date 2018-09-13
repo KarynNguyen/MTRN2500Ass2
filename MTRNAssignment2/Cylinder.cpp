@@ -1,5 +1,6 @@
 
 #include "Cylinder.hpp"
+#include "Vehicle.hpp"
 #include <cmath>
 #include <iostream>
 
@@ -41,10 +42,23 @@ Cylinder::Cylinder(double radius, double height, float red, float green, float b
 	setColor(red, green, blue);
 }
 
+Cylinder::Cylinder(double radius, double height, float red, float green, float blue, double x, double y, double z, double rotation, bool steering) : Shape(x, y, z, rotation) {
+
+	//set dimensions
+	r = radius;
+	h = height;
+	rotating = rotation;
+	curSteering = steering; 
+	curRotating = true;
+
+	//sets colour of cylinder
+	setColor(red, green, blue);
+}
 
 //draw function
 void Cylinder::draw() {
-	
+
+
 	glPushMatrix();
 	setColorInGL();
 	positionInGL();
@@ -54,7 +68,7 @@ void Cylinder::draw() {
 	GLUquadricObj * cylinder = gluNewQuadric();			//body of cylinder
 	
 	//moved axis so that cylinder is level with y = 0 and is the middle of the x and z axis
-	glTranslated(0, 0, -h/2.0);
+	glTranslated(0, r, -h/2.0);
 	
 	//cap of cylinder
 	gluDisk(diskCylTop, 0, r, 25, 1);
@@ -68,7 +82,6 @@ void Cylinder::draw() {
 
 	glPopMatrix();
 }
-
 //draws wheels with spokes
 void Cylinder::drawWheel() {
 
@@ -165,6 +178,16 @@ void Cylinder::drawWheel() {
 		glLineWidth(1);
 
 	glPopMatrix();
-	
+
+	//rotate wheels
+	/*
+	update(speed, dt);
+
+	rotation = (speed*dt)/r;
+
+	glRotated(rotation, 0, 1, 0 ); //causes overflow now...
+	*/
 }
+
+
 

@@ -322,6 +322,7 @@ void idle() {
 
 				// uncomment this line to connect to the robotics server.
 				RemoteDataManager::Connect("www.robotics.unsw.edu.au","18081");
+				//RemoteDataManager::Connect("192.168.1.1", "18081");
 
 				// on connect, let's tell the server what we look like
 				if (RemoteDataManager::IsConnected()) {
@@ -339,7 +340,7 @@ void idle() {
 					//rectangular prism body of vehicle
 					ShapesStruct.type = RECTANGULAR_PRISM;					//send type param
 					ShapesStruct.xyz[0] = static_cast<float>(x);			//send position parameters
-					ShapesStruct.xyz[1] = static_cast<float>(y);
+					ShapesStruct.xyz[1] = static_cast<float>(y+0.5);
 					ShapesStruct.xyz[2] = static_cast<float>(z);
 					ShapesStruct.rgb[0] = 1.0;								//colour parameters
 					ShapesStruct.rgb[1] = 0;
@@ -351,7 +352,7 @@ void idle() {
 					//trapezoidal top of body
 					ShapesStruct.type = TRAPEZOIDAL_PRISM;					//send type param
 					ShapesStruct.xyz[0] = static_cast<float>(x);			//send position parameters
-					ShapesStruct.xyz[1] = static_cast<float>(1.75);
+					ShapesStruct.xyz[1] = static_cast<float>(2.25);
 					ShapesStruct.xyz[2] = static_cast<float>(z);
 					ShapesStruct.rgb[0] = 1.0;								//colour parameters
 					ShapesStruct.rgb[1] = 0;
@@ -363,12 +364,12 @@ void idle() {
 					//triangular prism lights on top
 					ShapesStruct.type = TRIANGULAR_PRISM;					//send type param
 					ShapesStruct.xyz[0] = static_cast<float>(x);			//send position parameters
-					ShapesStruct.xyz[1] = static_cast<float>(2.75);
+					ShapesStruct.xyz[1] = static_cast<float>(3.25);
 					ShapesStruct.xyz[2] = static_cast<float>(z);
 					ShapesStruct.rgb[0] = 0;								//colour parameters
 					ShapesStruct.rgb[1] = 0;
 					ShapesStruct.rgb[2] = 1.0;
-					ShapesStruct.params.trap = { static_cast<float>(0.5), static_cast<float>(0.5), static_cast<float>(60), static_cast<float>(2.5) };		//triangular parameters
+					ShapesStruct.params.tri = { static_cast<float>(0.5), static_cast<float>(0.5), static_cast<float>(60), static_cast<float>(2.5) };		//triangular parameters
 					ShapesStruct.rotation = 0;
 					vm.shapes.push_back(ShapesStruct);
 					
@@ -380,7 +381,7 @@ void idle() {
 					ShapesStruct.rgb[0] = 1.0;								//colour parameters
 					ShapesStruct.rgb[1] = 1.0;
 					ShapesStruct.rgb[2] = 1.0;
-					ShapesStruct.params.trap = { static_cast<float>(0.5), static_cast<float>(1.0) };		//triangular parameters
+					ShapesStruct.params.cyl = { static_cast<float>(0.5), static_cast<float>(1.0) };		//triangular parameters
 					ShapesStruct.rotation = 0;
 					vm.shapes.push_back(ShapesStruct);
 
@@ -392,7 +393,7 @@ void idle() {
 					ShapesStruct.rgb[0] = 1.0;								//colour parameters
 					ShapesStruct.rgb[1] = 1.0;
 					ShapesStruct.rgb[2] = 1.0;
-					ShapesStruct.params.trap = { static_cast<float>(0.5), static_cast<float>(1.0) };		//triangular parameters
+					ShapesStruct.params.cyl = { static_cast<float>(0.5), static_cast<float>(1.0) };		//triangular parameters
 					ShapesStruct.rotation = 0;
 					vm.shapes.push_back(ShapesStruct);
 
@@ -404,7 +405,7 @@ void idle() {
 					ShapesStruct.rgb[0] = 1.0;								//colour parameters
 					ShapesStruct.rgb[1] = 1.0;
 					ShapesStruct.rgb[2] = 1.0;
-					ShapesStruct.params.trap = { static_cast<float>(0.5), static_cast<float>(1.0) };		//triangular parameters
+					ShapesStruct.params.cyl = { static_cast<float>(0.5), static_cast<float>(1.0) };		//triangular parameters
 					ShapesStruct.rotation = 0;
 					vm.shapes.push_back(ShapesStruct);
 
@@ -416,7 +417,7 @@ void idle() {
 					ShapesStruct.rgb[0] = 1.0;								//colour parameters
 					ShapesStruct.rgb[1] = 1.0;
 					ShapesStruct.rgb[2] = 1.0;
-					ShapesStruct.params.trap = { static_cast<float>(0.5), static_cast<float>(1.0) };		//triangular parameters
+					ShapesStruct.params.cyl = { static_cast<float>(0.5), static_cast<float>(1.0) };		//triangular parameters
 					ShapesStruct.rotation = 0;
 					vm.shapes.push_back(ShapesStruct);
 
