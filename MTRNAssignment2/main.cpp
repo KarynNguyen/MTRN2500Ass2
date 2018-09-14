@@ -381,7 +381,7 @@ void idle() {
 					ShapesStruct.rgb[0] = 1.0;								//colour parameters
 					ShapesStruct.rgb[1] = 1.0;
 					ShapesStruct.rgb[2] = 1.0;
-					ShapesStruct.params.cyl = { static_cast<float>(0.5), static_cast<float>(1.0) };		//triangular parameters
+					ShapesStruct.params.cyl = { static_cast<float>(0.5), static_cast<float>(1.0), static_cast<bool>(1.0), static_cast<bool>(1.0) };		//cyl parameters
 					ShapesStruct.rotation = 0;
 					vm.shapes.push_back(ShapesStruct);
 
@@ -393,7 +393,7 @@ void idle() {
 					ShapesStruct.rgb[0] = 1.0;								//colour parameters
 					ShapesStruct.rgb[1] = 1.0;
 					ShapesStruct.rgb[2] = 1.0;
-					ShapesStruct.params.cyl = { static_cast<float>(0.5), static_cast<float>(1.0) };		//triangular parameters
+					ShapesStruct.params.cyl = { static_cast<float>(0.5), static_cast<float>(1.0), static_cast<bool>(1.0), static_cast<bool>(1.0) };		//cyl parameters
 					ShapesStruct.rotation = 0;
 					vm.shapes.push_back(ShapesStruct);
 
@@ -405,7 +405,7 @@ void idle() {
 					ShapesStruct.rgb[0] = 1.0;								//colour parameters
 					ShapesStruct.rgb[1] = 1.0;
 					ShapesStruct.rgb[2] = 1.0;
-					ShapesStruct.params.cyl = { static_cast<float>(0.5), static_cast<float>(1.0) };		//triangular parameters
+					ShapesStruct.params.cyl = { static_cast<float>(0.5), static_cast<float>(1.0), static_cast<bool>(1.0), static_cast<bool>(0) };		//cyl parameters
 					ShapesStruct.rotation = 0;
 					vm.shapes.push_back(ShapesStruct);
 
@@ -417,7 +417,7 @@ void idle() {
 					ShapesStruct.rgb[0] = 1.0;								//colour parameters
 					ShapesStruct.rgb[1] = 1.0;
 					ShapesStruct.rgb[2] = 1.0;
-					ShapesStruct.params.cyl = { static_cast<float>(0.5), static_cast<float>(1.0) };		//triangular parameters
+					ShapesStruct.params.cyl = { static_cast<float>(0.5), static_cast<float>(1.0), static_cast<bool>(1.0), static_cast<bool>(0) };		//cyl parameters
 					ShapesStruct.rotation = 0;
 					vm.shapes.push_back(ShapesStruct);
 

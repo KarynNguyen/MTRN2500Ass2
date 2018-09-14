@@ -106,20 +106,28 @@ void myVehicle::draw() {
 		glPushMatrix();
 
 		positionInGL();
-		(*it)->draw();
-
 		//check if shape pointer is holding a cylinder, then check if its a wheel set rotation to steering value and implement rotation speed
 		Cylinder * cyl = dynamic_cast<Cylinder *>(*it);
-		if (cyl != nullptr) 
+		if (cyl != nullptr)
 		{
-			if(cyl->curSteering == true)
+			if (cyl->curSteering == true)
 			{
 				cyl->setRotation(steering);
 			}
 			if (cyl->curRotating == true) {
 				//set rotating
+				(cyl)->drawWheel();
 			}
+			////if ((cyl->curSteering && cyl->curRotating) == false ){
+				//(cyl)->draw();
+			//}
 		}
+		else {
+			(*it)->draw();
+		}
+
+
+		
 		
 
 		glPopMatrix();

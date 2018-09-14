@@ -88,6 +88,7 @@ void Cylinder::drawWheel() {
 	glPushMatrix();
 	setColorInGL();
 	positionInGL();
+	glColor3f(1, 0.3, 0.4);
 
 	GLUquadricObj * diskWhTop = gluNewQuadric();			//cap of cylinder
 	GLUquadricObj * diskWhBase = gluNewQuadric();			//base of cylinder
@@ -98,7 +99,7 @@ void Cylinder::drawWheel() {
 	double yCoord = r * sin(theta);
 
 	//moved axis so that cylinder is level with y = 0 and is the middle of the x and z axis
-	glTranslated(0, 0, -h / 2.0);
+	glTranslated(0, r, -h / 2.0);
 
 	//cap of cylinder
 	gluDisk(diskWhTop, 0, r, 25, 1);
