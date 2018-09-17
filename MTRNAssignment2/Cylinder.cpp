@@ -3,6 +3,7 @@
 #include "Vehicle.hpp"
 #include <cmath>
 #include <iostream>
+#include "Windows.h"
 
 #ifdef __APPLE__
 #include <OpenGL/gl.h>
@@ -108,13 +109,14 @@ double Cylinder::getTime2()
 #endif
 }
 
+
+
 //draws wheels with spokes
-void Cylinder::drawWheel() {
+void Cylinder::drawWheel(double speed) {
 
 	glPushMatrix();
 	setColorInGL();
 	positionInGL();
-	glColor3f(1, 0.3, 0.4);
 
 	GLUquadricObj * diskWhTop = gluNewQuadric();			//cap of cylinder
 	GLUquadricObj * diskWhBase = gluNewQuadric();			//base of cylinder
@@ -132,6 +134,11 @@ void Cylinder::drawWheel() {
 
 	//body of cylinder
 	gluCylinder(cylinderWh, r, r, h, 20, 20);
+	glPushMatrix();
+
+	rotation1 = speed / r;
+	glRotated(rotation1, 0, 1, 0);
+	glPopMatrix();
 
 		//horizontal spoke
 		glLineWidth(3);
@@ -142,7 +149,7 @@ void Cylinder::drawWheel() {
 		glEnd();
 
 		//vertical spoke
-		glLineWidth(3);
+		/*glLineWidth(3);
 		glColor3f(0, 0, 0);				//black spokes
 		glBegin(GL_LINES);
 		glVertex3f(0, r, 0);
@@ -163,7 +170,7 @@ void Cylinder::drawWheel() {
 		glBegin(GL_LINES);
 		glVertex3f(-xCoord, yCoord, 0);
 		glVertex3f(xCoord, -yCoord, 0);
-		glEnd();
+		glEnd(); */
 
 	//base of cylinder
 	setColorInGL();
@@ -179,7 +186,7 @@ void Cylinder::drawWheel() {
 		glEnd();
 
 		//vertical spoke
-		glLineWidth(3);
+		/*glLineWidth(3);
 		glColor3f(0, 0, 0);				//black spokes
 		glBegin(GL_LINES);
 		glVertex3f(0, r, 0);
@@ -200,29 +207,11 @@ void Cylinder::drawWheel() {
 		glBegin(GL_LINES);
 		glVertex3f(xCoord, yCoord, 0);
 		glVertex3f(-xCoord, -yCoord, 0);
-		glEnd();
+		glEnd(); */
 
 		glLineWidth(1); 
 		glPopMatrix();
-
-		/*double SPEED;
-
-		Cylinder::getSpeed() = SPEED;
-		
-
-
-	const float sleep_time_between_frames_in_seconds = 0.025;
-	static double previousTime = getTime2();
-	const double currTime = getTime2();
-	const double elapsedTime = currTime - previousTime;
-	previousTime = currTime;
-	rotation1 = (speed*elapsedTime) /r;
-	
-
-	glRotated(rotation1, 0, 1, 0);
-	glPopMatrix();*/ 
 }
-
 
 
 

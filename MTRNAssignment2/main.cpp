@@ -5,6 +5,8 @@
 #include <cstring>
 #include <sstream>
 #include <map>
+#include <Windows.h>
+#include <XInput.h>
 
 #ifdef __APPLE__
 	#include <OpenGL/gl.h>
@@ -43,6 +45,8 @@
 #include "Messages.hpp"
 #include "HUD.hpp"
 #include "ObstacleManager.hpp"
+#include "XBoxController.h"
+#include "XInputWrapper.h"
 
 
 void display();
@@ -158,24 +162,6 @@ void drawGoals()
 	}
 }
 
-void testDraw()
-{
-
-	RectangularPrism rectPrism1(10.0, 6.0, 8.0, 1, 0, 0, 20 ,0 ,20, 0);
-	rectPrism1.draw();
-
-	TriangularPrism triPrism1(10.0, 10.0 ,60.0, 8.0, 0, 1, 0, -20, 0, 20, 45);
-	triPrism1.draw();
-
-	TrapPrism trapPrism1(10.0, 6.0, 6.0, 8.0, 1.5, 0, 0, 1, -20, 0, -20, 0);
-	trapPrism1.draw();
-
-	Cylinder cyl1(6.0, 2.0, 1, 0, 0.4, 20, 0, -20, 90);
-	cyl1.draw();
-	
-	Cylinder cyl2(3.0, 10.0, 0, 1, 1, 30, 0, -30, 90);
-	cyl2.drawWheel();
-};
 
 void display() {
 	frameCounter++;
@@ -218,8 +204,6 @@ void display() {
 
 	// draw HUD
 	HUD::Draw();
-	
-	//testDraw();
 
 	glutSwapBuffers();
 };
@@ -265,7 +249,45 @@ double getTime()
 
 void idle() {
 
-	if (KeyManager::get()->isAsciiKeyPressed('a')) {
+	XInputWrapper xinput;
+	GamePad::XBoxController controller(&xinput, 0);
+
+	if (controller.PressedLeftDpad() == true) {
+
+		Camera::get()->strafeLeft();
+
+	}
+
+	if (controller.PressedRightDpad() == true) {
+
+		Camera::get()->strafeRight();
+
+	}
+
+	if (controller.PressedUpDpad() == true) {
+
+		Camera::get()->moveForward();
+
+	}
+	
+	if (controller.PressedDownDpad() == true) {
+
+		Camera::get()->moveBackward();
+
+	}
+
+	if (controller.PressedLeftShoulder() == true) {
+
+		Camera::get()->strafeUp();
+
+	}
+
+	if (controller.PressedRightShoulder() == true) {
+
+		Camera::get()->strafeDown();
+	}
+
+	/*if (KeyManager::get()->isAsciiKeyPressed('a')) {
 		Camera::get()->strafeLeft();
 	}
 
@@ -287,26 +309,39 @@ void idle() {
 
 	if (KeyManager::get()->isAsciiKeyPressed(' ')) {
 		Camera::get()->strafeUp();
-	}
+	}*/
 
 	speed = 0;
 	steering = 0;
 
-	if (KeyManager::get()->isSpecialKeyPressed(GLUT_KEY_LEFT)) {
-		steering = Vehicle::MAX_LEFT_STEERING_DEGS * -1;   
-	}
+	//direction and speed of car
 
-	if (KeyManager::get()->isSpecialKeyPressed(GLUT_KEY_RIGHT)) {
-		steering = Vehicle::MAX_RIGHT_STEERING_DEGS * -1;
-	}
+	if (controller.PressedA() == true) {
 
-	if (KeyManager::get()->isSpecialKeyPressed(GLUT_KEY_UP)) {
-		speed = Vehicle::MAX_FORWARD_SPEED_MPS;
-	}
-
-	if (KeyManager::get()->isSpecialKeyPressed(GLUT_KEY_DOWN)) {
 		speed = Vehicle::MAX_BACKWARD_SPEED_MPS;
-	} 
+
+	}
+
+	if (controller.PressedY() == true) {
+
+		speed = Vehicle::MAX_FORWARD_SPEED_MPS;
+
+	}
+
+	if (controller.PressedX() == true) {
+
+		steering = Vehicle::MAX_LEFT_STEERING_DEGS * -1;
+
+	}
+
+	if (controller.PressedB() == true) {
+
+		steering = Vehicle::MAX_RIGHT_STEERING_DEGS * -1;
+
+	}
+
+
+	
 
 	// attempt to do data communications every 4 frames if we've created a local vehicle
 	if(frameCounter % 4 == 0 && vehicle != NULL) {
