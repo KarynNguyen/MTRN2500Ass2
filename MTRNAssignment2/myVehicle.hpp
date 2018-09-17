@@ -5,6 +5,7 @@
 #include "TriangularPrism.hpp"
 #include "TrapPrism.hpp"
 #include "Cylinder.hpp"
+#include <Windows.h>
 
 //Absract myVehicle class derived from Vehicle
 class myVehicle : public Vehicle
@@ -18,6 +19,8 @@ public:
 	//void update(double speed_, double dt);
 	//double dt;
 	//double speed;
+	double rotation1;
+	double getTime2();
 
 
 };

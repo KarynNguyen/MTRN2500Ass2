@@ -26,4 +26,9 @@ public:
 	void draw();
 	void drawWheel();
 
+	double rotation1;
+	double getTime2();
+
+
+	double getSpeed(double speed);
 };

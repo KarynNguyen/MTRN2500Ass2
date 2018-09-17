@@ -82,6 +82,32 @@ void Cylinder::draw() {
 
 	glPopMatrix();
 }
+
+double Cylinder::getSpeed(double speed) {
+
+	return speed;
+
+}
+
+double Cylinder::getTime2()
+{
+#if defined(WIN32)
+	LARGE_INTEGER freqli;
+	LARGE_INTEGER li;
+	if (QueryPerformanceCounter(&li) && QueryPerformanceFrequency(&freqli)) {
+		return double(li.QuadPart) / double(freqli.QuadPart);
+	}
+	else {
+		static ULONGLONG start = GetTickCount64();
+		return (GetTickCount64() - start) / 1000.0;
+	}
+#else
+	struct timeval t;
+	gettimeofday(&t, NULL);
+	return t.tv_sec + (t.tv_usec / 1000000.0);
+#endif
+}
+
 //draws wheels with spokes
 void Cylinder::drawWheel() {
 
@@ -176,19 +202,28 @@ void Cylinder::drawWheel() {
 		glVertex3f(-xCoord, -yCoord, 0);
 		glEnd();
 
-		glLineWidth(1);
+		glLineWidth(1); 
+		glPopMatrix();
 
-	glPopMatrix();
+		/*double SPEED;
 
-	//rotate wheels
-	/*
-	update(speed, dt);
+		Cylinder::getSpeed() = SPEED;
+		
 
-	rotation = (speed*dt)/r;
 
-	glRotated(rotation, 0, 1, 0 ); //causes overflow now...
-	*/
+	const float sleep_time_between_frames_in_seconds = 0.025;
+	static double previousTime = getTime2();
+	const double currTime = getTime2();
+	const double elapsedTime = currTime - previousTime;
+	previousTime = currTime;
+	rotation1 = (speed*elapsedTime) /r;
+	
+
+	glRotated(rotation1, 0, 1, 0);
+	glPopMatrix();*/ 
 }
+
+
 
 
 

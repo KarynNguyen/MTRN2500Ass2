@@ -26,10 +26,10 @@ myVehicle::myVehicle() {
 	RectangularPrism * body = new RectangularPrism(4, 1.75, 2.5, 1, 0, 0, 0, 0.5, 0, 0);
 	TrapPrism * top = new TrapPrism(2.0, 1.0, 1.0, 2.5, 0.5, 1.0, 0, 0, 0, 2.25, 0, 0); 
 	TriangularPrism * topLight = new TriangularPrism(0.5, 0.5, 60, 2.5, 0, 0, 1.0, 0, 3.25, 0, 0);
-	Cylinder * frontLWheel = new Cylinder(0.5, 1.0, 1, 1, 1, 1.2, 0, 1.25, 0, 1);
-	Cylinder * frontRWheel = new Cylinder(0.5, 1.0, 1, 1, 1, 1.2, 0,-1.25, 0, 1);
-	Cylinder * backRWheel = new Cylinder(0.5, 1.0, 1, 1, 1, -1.2, 0,-1.25, 0, 0);
-	Cylinder * backLWheel = new Cylinder(0.5, 1.0, 1, 1, 1, -1.2, 0, 1.25, 0, 0);
+	Cylinder * frontLWheel = new Cylinder(0.5, 1.0, 1, 1, 1, 1.2, 0, 1.25, 1, 1);
+	Cylinder * frontRWheel = new Cylinder(0.5, 1.0, 1, 1, 1, 1.2, 0,-1.25, 1, 1);
+	Cylinder * backRWheel = new Cylinder(0.5, 1.0, 1, 1, 1, -1.2, 0,-1.25, 1, 0);
+	Cylinder * backLWheel = new Cylinder(0.5, 1.0, 1, 1, 1, -1.2, 0, 1.25, 1, 0);
 
 	//add shapes to shape vector to be drawn
 	addShape(body);
@@ -67,14 +67,14 @@ myVehicle::myVehicle(VehicleModel vm) {
 			break;
 			case CYLINDER:
 			{
-				/*if (!(vm.shapes[i].params.cyl.isRolling)) {
+				if (!(vm.shapes[i].params.cyl.isRolling)) {
 					Cylinder * cyl = new Cylinder(vm.shapes[i].params.cyl.radius, vm.shapes[i].params.cyl.depth, vm.shapes[i].rgb[0], vm.shapes[i].rgb[1], vm.shapes[i].rgb[2], vm.shapes[i].xyz[0], vm.shapes[i].xyz[1], vm.shapes[i].xyz[2]);
 					addShape(cyl);
 				}
 				else {
 					Cylinder * cylWheel = new Cylinder(vm.shapes[i].params.cyl.radius, vm.shapes[i].params.cyl.depth, vm.shapes[i].rgb[0], vm.shapes[i].rgb[1], vm.shapes[i].rgb[2], vm.shapes[i].xyz[0], vm.shapes[i].xyz[1], vm.shapes[i].xyz[2], vm.shapes[i].rotation);
 					addShape(cylWheel);
-				}*/
+				}
 				if (!(vm.shapes[i].params.cyl.isSteering)) {
 					Cylinder * cyl = new Cylinder(vm.shapes[i].params.cyl.radius, vm.shapes[i].params.cyl.depth, vm.shapes[i].rgb[0], vm.shapes[i].rgb[1], vm.shapes[i].rgb[2], vm.shapes[i].xyz[0], vm.shapes[i].xyz[1], vm.shapes[i].xyz[2]);
 					addShape(cyl);
@@ -95,6 +95,25 @@ myVehicle::myVehicle(VehicleModel vm) {
 
 };
 
+double myVehicle::getTime2()
+{
+#if defined(WIN32)
+	LARGE_INTEGER freqli;
+	LARGE_INTEGER li;
+	if (QueryPerformanceCounter(&li) && QueryPerformanceFrequency(&freqli)) {
+		return double(li.QuadPart) / double(freqli.QuadPart);
+	}
+	else {
+		static ULONGLONG start = GetTickCount64();
+		return (GetTickCount64() - start) / 1000.0;
+	}
+#else
+	struct timeval t;
+	gettimeofday(&t, NULL);
+	return t.tv_sec + (t.tv_usec / 1000000.0);
+#endif
+}
+
 //Note: (x,y,z) is the centre of the prism
 //draws the 6 faces of the trapezoidal prism 
 void myVehicle::draw() {
@@ -110,26 +129,22 @@ void myVehicle::draw() {
 		Cylinder * cyl = dynamic_cast<Cylinder *>(*it);
 		if (cyl != nullptr)
 		{
-			if (cyl->curSteering == true)
+			if (cyl->curRotating == true)
 			{
-				cyl->setRotation(steering);
+				//cyl->getSpeed(speed);
+
+				if (cyl->curSteering == true) {
+
+					cyl->setRotation(steering);
+				
+				}
+
+			cyl->drawWheel();
 			}
-			if (cyl->curRotating == true) {
-				//set rotating
-				(cyl)->drawWheel();
-			}
-			////if ((cyl->curSteering && cyl->curRotating) == false ){
-				//(cyl)->draw();
-			//}
 		}
 		else {
 			(*it)->draw();
 		}
-
-
-		
-		
-
 		glPopMatrix();
 	}
 	
@@ -209,4 +224,3 @@ void myVehicle::draw() {
 	// move back to global frame of reference
 	glPopMatrix();	*/
 };
-
