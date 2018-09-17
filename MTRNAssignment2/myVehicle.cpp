@@ -22,6 +22,7 @@
 
 //constructor for custom car 
 myVehicle::myVehicle() {
+	
 	//create pointers to custom behicle shapes to be added to shapes vector
 	RectangularPrism * body = new RectangularPrism(4, 1.75, 2.5, 1, 0, 0, 0, 0.5, 0, 0);
 	TrapPrism * top = new TrapPrism(2.0, 1.0, 1.0, 2.5, 0.5, 1.0, 0, 0, 0, 2.25, 0, 0); 
@@ -39,49 +40,45 @@ myVehicle::myVehicle() {
 	addShape(frontRWheel);
 	addShape(backLWheel);
 	addShape(backRWheel);
+	
 };
 
 //constructor for other vehicles
 myVehicle::myVehicle(VehicleModel vm) {
-	for (int i = 0; i < vm.shapes.size(); i++) 
+
+	std::vector<ShapeInit>::iterator it;
+
+	for (it = vm.shapes.begin(); it != vm.shapes.end(); it++) 
 	{
-		switch (vm.shapes[i].type)
+		switch (it->type)
 		{
 			case RECTANGULAR_PRISM:
 			{
-				RectangularPrism * rect = new RectangularPrism(vm.shapes[i].params.rect.xlen, vm.shapes[i].params.rect.ylen, vm.shapes[i].params.rect.zlen, vm.shapes[i].rgb[0], vm.shapes[i].rgb[1], vm.shapes[i].rgb[2], vm.shapes[i].xyz[0], vm.shapes[i].xyz[1], vm.shapes[i].xyz[2], vm.shapes[i].rotation);
+				RectangularPrism * rect = new RectangularPrism(it->params.rect.xlen, it->params.rect.ylen, it->params.rect.zlen, it->xyz[0], it->xyz[1], it->xyz[2], it->rgb[0], it->rgb[1], it->rgb[2], it->rotation);
 				addShape(rect);
 			} 
 			break;
 			case TRIANGULAR_PRISM:
 			{
-				TriangularPrism * tri = new TriangularPrism(vm.shapes[i].params.tri.alen, vm.shapes[i].params.tri.blen, vm.shapes[i].params.tri.angle, vm.shapes[i].params.tri.depth, vm.shapes[i].rgb[0], vm.shapes[i].rgb[1], vm.shapes[i].rgb[2], vm.shapes[i].xyz[0], vm.shapes[i].xyz[1], vm.shapes[i].xyz[2], vm.shapes[i].rotation);
+				TriangularPrism * tri = new TriangularPrism(it->params.tri.alen, it->params.tri.blen, it->params.tri.angle, it->params.tri.depth, it->rgb[0], it->rgb[1], it->rgb[2], it->xyz[0], it->xyz[1], it->xyz[2], it->rotation);
 				addShape(tri);
 			}
 			break;
 			case TRAPEZOIDAL_PRISM:
 			{
-				TrapPrism * trap = new TrapPrism(vm.shapes[i].params.trap.alen, vm.shapes[i].params.trap.blen, vm.shapes[i].params.trap.height, vm.shapes[i].params.trap.depth, vm.shapes[i].params.trap.aoff, vm.shapes[i].rgb[0], vm.shapes[i].rgb[1], vm.shapes[i].rgb[2], vm.shapes[i].xyz[0], vm.shapes[i].xyz[1], vm.shapes[i].xyz[2], vm.shapes[i].rotation);
+				TrapPrism * trap = new TrapPrism(it->params.trap.alen, it->params.trap.blen, it->params.trap.height, it->params.trap.depth, it->params.trap.aoff, it->rgb[0], it->rgb[1], it->rgb[2], it->xyz[0], it->xyz[1], it->xyz[2], it->rotation);
 				addShape(trap);
 			}
 			break;
 			case CYLINDER:
 			{
-				/*if (!(vm.shapes[i].params.cyl.isRolling)) {
-					Cylinder * cyl = new Cylinder(vm.shapes[i].params.cyl.radius, vm.shapes[i].params.cyl.depth, vm.shapes[i].rgb[0], vm.shapes[i].rgb[1], vm.shapes[i].rgb[2], vm.shapes[i].xyz[0], vm.shapes[i].xyz[1], vm.shapes[i].xyz[2]);
+				if (!(it->params.cyl.isRolling)) {
+					Cylinder * cyl = new Cylinder(it->params.cyl.radius, it->params.cyl.depth, it->rgb[0], it->rgb[1], it->rgb[2], it->xyz[0], it->xyz[1], it->xyz[2], it->rotation);
 					addShape(cyl);
 				}
 				else {
-					Cylinder * cylWheel = new Cylinder(vm.shapes[i].params.cyl.radius, vm.shapes[i].params.cyl.depth, vm.shapes[i].rgb[0], vm.shapes[i].rgb[1], vm.shapes[i].rgb[2], vm.shapes[i].xyz[0], vm.shapes[i].xyz[1], vm.shapes[i].xyz[2], vm.shapes[i].rotation);
+					Cylinder * cylWheel = new Cylinder(it->params.cyl.radius, it->params.cyl.depth, it->rgb[0], it->rgb[1], it->rgb[2], it->xyz[0], it->xyz[1], it->xyz[2], it->rotation, it->params.cyl.isSteering);
 					addShape(cylWheel);
-				}*/
-				if (!(vm.shapes[i].params.cyl.isSteering)) {
-					Cylinder * cyl = new Cylinder(vm.shapes[i].params.cyl.radius, vm.shapes[i].params.cyl.depth, vm.shapes[i].rgb[0], vm.shapes[i].rgb[1], vm.shapes[i].rgb[2], vm.shapes[i].xyz[0], vm.shapes[i].xyz[1], vm.shapes[i].xyz[2]);
-					addShape(cyl);
-				}
-				else {
-					Cylinder * cyl = new Cylinder(vm.shapes[i].params.cyl.radius, vm.shapes[i].params.cyl.depth, vm.shapes[i].rgb[0], vm.shapes[i].rgb[1], vm.shapes[i].rgb[2], vm.shapes[i].xyz[0], vm.shapes[i].xyz[1], vm.shapes[i].xyz[2], vm.shapes[i].rotation, vm.shapes[i].params.cyl.isSteering);
-					addShape(cyl);
 				}
 			}
 			break;
@@ -89,14 +86,10 @@ myVehicle::myVehicle(VehicleModel vm) {
 		default:
 			break;
 		}
-
 	}
-	
-
 };
 
-//Note: (x,y,z) is the centre of the prism
-//draws the 6 faces of the trapezoidal prism 
+//draws the vehicle
 void myVehicle::draw() {
 
 	std::vector<Shape * >::iterator it;
@@ -110,103 +103,22 @@ void myVehicle::draw() {
 		Cylinder * cyl = dynamic_cast<Cylinder *>(*it);
 		if (cyl != nullptr)
 		{
-			if (cyl->curSteering == true)
-			{
-				cyl->setRotation(steering);
+			if (cyl->curRotating == true) {				//cylinder is a wheel and hence rotates
+				if (cyl->curSteering == true)				//determines whether or not it is a front wheel ad sets steering
+				{
+					cyl->setRotation(steering);
+				}
+				cyl->drawWheel();
+				//cyl->setSpeed(speed);
 			}
-			if (cyl->curRotating == true) {
-				//set rotating
-				(cyl)->drawWheel();
-			}
-			////if ((cyl->curSteering && cyl->curRotating) == false ){
-				//(cyl)->draw();
-			//}
 		}
 		else {
 			(*it)->draw();
 		}
-
-
-		
-		
-
 		glPopMatrix();
 	}
-	
-	/*
-	//dimensions of rectangle base
-	double rect_l = 4.0;
-	double rect_w = 1.75;
-	double rect_d = 2.5;
-
-	//dimensions of trapezoidal top
-	double trap_a = 2.0;
-	double trap_b = 1.0;
-	double trap_h = 1.0;
-	double trap_off = 0.5;
-	double trap_depth = 2.5;
-
-	//dimensions of cylindrical wheels
-	double radius_b = 0.5;
-	double radius_f = 0.5;
-	double depth = 0.5;
-
-	//dimensions of triangular prism on top of head
-	double side = 0.5;
-	double base = 0.5;
-	double angle = 60;
-	double tri_depth = 2.5;
-
-	// move to the vehicle’s local frame of reference
-	glPushMatrix();
-	positionInGL();
-	// all the local drawing code
-	
-	//draw rectangular prism body of vehicle
-	glPushMatrix();
-	RectangularPrism rectBody(rect_l, rect_w, rect_d, 1, 0, 0, 0, 0 ,0, 0);		//red body
-	rectBody.draw();
-	glPopMatrix();
-	
-	//draw trapezoidal prism on top of body
-	glPushMatrix();
-	TrapPrism trapTop(trap_a, trap_b, trap_h, trap_depth, trap_off, 1, 0, 0, 0, rect_w, 0, 0);		//blue top
-	trapTop.draw();
-	glPopMatrix();
-	
-	//draw left front wheels (closed solid cylinder)
-	glPushMatrix();
-	glRotated(-getSteering(), 0, 1, 0);			//do steering of wheels as car is turning
-	Cylinder flWheel(radius_f, depth, 1, 1, 1, 1.2 , 0, -rect_d/2.0, 0);		//white front wheels
-	flWheel.drawWheel();
-	glPopMatrix();
-
-	//draw right front wheel (closed solid cylinder)
-	glPushMatrix();
-	glRotated(-getSteering(), 0, 1, 0);			//do steering of wheels as car is turning
-	Cylinder frWheel(radius_f, depth, 1, 1, 1, 1.2, 0, rect_d/2.0, 0);		//white front wheels
-	frWheel.drawWheel();
-	glPopMatrix();
-	
-	//draw right back wheel (closed solid cylinder)
-	glPushMatrix();
-	Cylinder brWheel(radius_b, depth, 1, 1, 1, -1.2, 0, rect_d/2.0, 0);		//white back wheels
-	brWheel.drawWheel();
-	glPopMatrix();
-
-	//draw left back wheel (closed solid cylinder)
-	glPushMatrix();
-	Cylinder blWheel(radius_b, depth, 1, 1, 1, -1.2, 0, -rect_d/2.0, 0);		//white back wheels
-	blWheel.drawWheel();
-	glPopMatrix();
-	
-	//draw lights on top (triangluar prism)
-	glPushMatrix();
-	TriangularPrism triTop(side, base, angle, tri_depth, 0, 0, 1, 0, rect_w + trap_h, 0, 0);		//blue lights on top
-	triTop.draw();
-	glPopMatrix();
-
-	// move back to global frame of reference
-	glPopMatrix();	*/
 };
+
+
+
 

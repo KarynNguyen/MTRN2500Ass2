@@ -11,14 +11,13 @@ class myVehicle : public Vehicle
 {
 public:
 	myVehicle();					//constructor with no arguments passed in
-	myVehicle(VehicleModel vm);		//constructor with VehicleModel passed in (used to draw other vehicles)
+	myVehicle(VehicleModel vm);		//constructor with VehicleModel passed in 
 
 	//function to draw the custom vehicle
 	void draw();
 	//void update(double speed_, double dt);
 	//double dt;
 	//double speed;
-
 
 };
 

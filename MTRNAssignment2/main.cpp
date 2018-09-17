@@ -1,3 +1,4 @@
+//authhors: z5160445 & z5191060 (group 19)
 
 #include <iostream>
 #include <cstdlib>
@@ -173,7 +174,7 @@ void testDraw()
 	cyl1.draw();
 	
 	Cylinder cyl2(3.0, 10.0, 0, 1, 1, 30, 0, -30, 90);
-	cyl2.drawWheel();
+	cyl2.draw();
 };
 
 void display() {
@@ -329,6 +330,7 @@ void idle() {
 					ObstacleManager::get()->removeAll();
 
 					VehicleModel vm;
+
 					vm.remoteID = 0;
 
 					//(x,y,x) position of custom car

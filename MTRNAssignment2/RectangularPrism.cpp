@@ -41,7 +41,7 @@ RectangularPrism::RectangularPrism(double length, double width, double depth, fl
 };
 
 //constructor with rotation
-RectangularPrism::RectangularPrism(double length, double width, double depth, float red, float green, float blue, double x, double y, double z, double rotation) : Shape (x, y, z, rotation) {
+RectangularPrism::RectangularPrism(double length, double width, double depth, float red, float green, float blue, double x, double y, double z, double rotation) : Shape(x, y, z, rotation) {
 	//sets dimensions of prism
 	x_len = length;
 	y_len = width;
@@ -66,7 +66,7 @@ void RectangularPrism::draw() {
 	glVertex3f(-x_len / 2.0, 0, z_len / 2.0);
 	glVertex3f(-x_len / 2.0, 0, -z_len / 2.0);
 	glEnd();
-	
+
 	//top face
 	glBegin(GL_QUADS);
 	glVertex3f(x_len / 2.0, y_len, -z_len / 2.0);
@@ -74,7 +74,7 @@ void RectangularPrism::draw() {
 	glVertex3f(-x_len / 2.0, y_len, z_len / 2.0);
 	glVertex3f(-x_len / 2.0, y_len, -z_len / 2.0);
 	glEnd();
-	
+
 	//left side face
 	glBegin(GL_QUADS);
 	glVertex3f(x_len / 2.0, y_len, -z_len / 2.0);
@@ -82,7 +82,7 @@ void RectangularPrism::draw() {
 	glVertex3f(x_len / 2.0, 0, z_len / 2.0);
 	glVertex3f(x_len / 2.0, 0, -z_len / 2.0);
 	glEnd();
-	
+
 	//right side face
 	glBegin(GL_QUADS);
 	glVertex3f(-x_len / 2.0, y_len, -z_len / 2.0);
@@ -106,6 +106,6 @@ void RectangularPrism::draw() {
 	glVertex3f(-x_len / 2.0, 0, z_len / 2.0);
 	glVertex3f(x_len / 2.0, 0, z_len / 2.0);
 	glEnd();
-	
+
 	glPopMatrix();
 };
