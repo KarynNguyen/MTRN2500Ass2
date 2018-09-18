@@ -67,7 +67,7 @@ myVehicle::myVehicle(VehicleModel vm) {
 			break;
 			case CYLINDER:
 			{
-				Cylinder * cyl = new Cylinder(vm.shapes[i].params.cyl.radius, vm.shapes[i].params.cyl.depth, vm.shapes[i].rgb[0], vm.shapes[i].rgb[1], vm.shapes[i].rgb[2], vm.shapes[i].xyz[0], vm.shapes[i].xyz[1], vm.shapes[i].xyz[2], vm.shapes[i].rotation, vm.shapes[i].params.cyl.isSteering);
+			Cylinder * cyl = new Cylinder(vm.shapes[i].params.cyl.radius, vm.shapes[i].params.cyl.depth, vm.shapes[i].rgb[0], vm.shapes[i].rgb[1], vm.shapes[i].rgb[2], vm.shapes[i].xyz[0], vm.shapes[i].xyz[1], vm.shapes[i].xyz[2], vm.shapes[i].rotation, vm.shapes[i].params.cyl.isSteering);
 				addShape(cyl);
 			}
 			break;
@@ -80,25 +80,6 @@ myVehicle::myVehicle(VehicleModel vm) {
 	
 
 };
-
-double myVehicle::getTime2()
-{
-#if defined(WIN32)
-	LARGE_INTEGER freqli;
-	LARGE_INTEGER li;
-	if (QueryPerformanceCounter(&li) && QueryPerformanceFrequency(&freqli)) {
-		return double(li.QuadPart) / double(freqli.QuadPart);
-	}
-	else {
-		static ULONGLONG start = GetTickCount64();
-		return (GetTickCount64() - start) / 1000.0;
-	}
-#else
-	struct timeval t;
-	gettimeofday(&t, NULL);
-	return t.tv_sec + (t.tv_usec / 1000000.0);
-#endif
-}
 
 //Note: (x,y,z) is the centre of the prism
 //draws the 6 faces of the trapezoidal prism 
@@ -117,12 +98,13 @@ void myVehicle::draw() {
 		{
 			if (cyl->curRotating == true)
 			{
-				//cyl->getSpeed(speed);
+				double speed = getSpeed();
+
 				if (cyl->curSteering == true) {
 					cyl->setRotation(steering);
 				}
 
-			cyl->drawWheel();
+			cyl->drawWheel(speed);
 			}
 		}
 		else {

@@ -3,6 +3,7 @@
 #include "Vehicle.hpp"
 #include <cmath>
 #include <iostream>
+#include "Windows.h"
 
 #ifdef __APPLE__
 #include <OpenGL/gl.h>
@@ -104,9 +105,17 @@ double Cylinder::getTime2()
 #endif
 }
 
-//draws wheels with spokes
-void Cylinder::drawWheel() {
 
+
+//draws wheels with spokes
+void Cylinder::drawWheel(double speed) {
+
+	const float DEG2RAD = 3.141593f / 180;
+	const float RAD2DEG = 180 / 3.141593f;
+	
+	glPushMatrix();
+
+	//draws wheels
 	glPushMatrix();
 	setColorInGL();
 	positionInGL();
@@ -115,7 +124,7 @@ void Cylinder::drawWheel() {
 	GLUquadricObj * diskWhBase = gluNewQuadric();			//base of cylinder
 	GLUquadricObj * cylinderWh = gluNewQuadric();			//body of cylinder
 
-	double theta = 45 * 3.141593f / 180;					//converts degress to radians
+	double theta = 45 * DEG2RAD;					//converts degress to radians
 	double xCoord = r * cos(theta);
 	double yCoord = r * sin(theta);
 
@@ -128,95 +137,62 @@ void Cylinder::drawWheel() {
 	//body of cylinder
 	gluCylinder(cylinderWh, r, r, h, 20, 20);
 
-		//horizontal spoke
-		glLineWidth(3);
-		glColor3f(0, 0, 0);				//black spokes
-		glBegin(GL_LINES);
-		glVertex3f(r, 0, 0);
-		glVertex3f(-r, 0, 0);
-		glEnd();
-
-		//vertical spoke
-		glLineWidth(3);
-		glColor3f(0, 0, 0);				//black spokes
-		glBegin(GL_LINES);
-		glVertex3f(0, r, 0);
-		glVertex3f(0, -r, 0);
-		glEnd();
-
-		//diagonal spoke 1
-		glLineWidth(3);
-		glColor3f(0, 0, 0);				//black spokes
-		glBegin(GL_LINES);
-		glVertex3f(xCoord, yCoord, 0);
-		glVertex3f(-xCoord, -yCoord, 0);
-		glEnd();
-
-		//diagonal spoke 2
-		glLineWidth(3);
-		glColor3f(0, 0, 0);				//black spokes
-		glBegin(GL_LINES);
-		glVertex3f(-xCoord, yCoord, 0);
-		glVertex3f(xCoord, -yCoord, 0);
-		glEnd();
-
 	//base of cylinder
 	setColorInGL();
 	glTranslated(0, 0, h);
 	gluDisk(diskWhBase, 0, r, 25, 1);
 
-		//horizontal spoke
-		glLineWidth(3);
-		glColor3f(0, 0, 0);				//black spokes
-		glBegin(GL_LINES);
-		glVertex3f(r, 0, 0);
-		glVertex3f(-r, 0, 0);
-		glEnd();
+	glPopMatrix();
+	
+	//does rotation of wheels
+	double oldTime = 0.0;
 
-		//vertical spoke
-		glLineWidth(3);
-		glColor3f(0, 0, 0);				//black spokes
-		glBegin(GL_LINES);
-		glVertex3f(0, r, 0);
-		glVertex3f(0, -r, 0);
-		glEnd();
+	double currTime = glutGet(GLUT_ELAPSED_TIME);			//gets the time since glut init was called (in milliseconds)
+	currTime = currTime / 1000;								//changes from milliseconds to seconds
+	double dt = currTime - oldTime;							//calculated change in time	
+	oldTime = currTime;										//sets the current time as the new time
 
-		//diagonal spoke 1
-		glLineWidth(3);
-		glColor3f(0, 0, 0);				//black spokes
-		glBegin(GL_LINES);
-		glVertex3f(xCoord, -yCoord, 0);
-		glVertex3f(-xCoord, yCoord, 0);
-		glEnd();
+	rotation1 = ((speed*dt) / r) * RAD2DEG;					//converts angle of rotation to radians
+	glRotated(rotation1, 0, 0, -1);							//rotates wheel according to angular velocity calculated
 
-		//diagonal spoke 2
-		glLineWidth(3);
-		glColor3f(0, 0, 0);				//black spokes
-		glBegin(GL_LINES);
-		glVertex3f(xCoord, yCoord, 0);
-		glVertex3f(-xCoord, -yCoord, 0);
-		glEnd();
 
-		glLineWidth(1); 
-		glPopMatrix();
+	//draws spokes 
+	glPushMatrix();
+
+	/*glTranslated(0, r, -h / 2.0);
+
+	//cap of cylinder
+	gluDisk(diskWhTop, 0, r, 25, 1);
+
+	//body of cylinder
+	gluCylinder(cylinderWh, r, r, h, 20, 20);
+
+	//base of cylinder
+	setColorInGL();
+	glTranslated(0, 0, h);
+	gluDisk(diskWhBase, 0, r, 25, 1);
+	glTranslated();*/
+
+	//horizontal spoke
+	glLineWidth(5);
+	glColor3f(0.4, 0.3, 0.2);				//black spokes
+	glBegin(GL_LINES);
+	glVertex3f(r, 0, 0);
+	glVertex3f(-r, 0, 0);
+	glEnd();
+
+	//horizontal spoke
+	glLineWidth(5);
+	glColor3f(0.4, 0.3, 0.2);				//black spokes
+	glBegin(GL_LINES);
+	glVertex3f(r, 0, 0);
+	glVertex3f(-r, 0, 0);
+	glEnd();
+
+	glLineWidth(1);
 
 	glPopMatrix();
-};
-		
-/*double SPEED;
 
-	Cylinder::getSpeed() = SPEED;
-		
-
-
-	const float sleep_time_between_frames_in_seconds = 0.025;
-	static double previousTime = getTime2();
-	const double currTime = getTime2();
-	const double elapsedTime = currTime - previousTime;
-	previousTime = currTime;
-	rotation1 = (speed*elapsedTime) /r;
-	
-
-	glRotated(rotation1, 0, 1, 0);
-	glPopMatrix();*/ 
+	glPopMatrix();
+}
 

@@ -23,7 +23,7 @@ public:
 
 	//function to draw the cylinder
 	void draw();
-	void drawWheel();
+	void drawWheel(double speed);
 
 	double rotation1;
 	double getTime2();
